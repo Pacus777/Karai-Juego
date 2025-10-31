@@ -7,14 +7,13 @@ public class MenuPrincipal : MonoBehaviour
 {
     public void IniciarJuego()
     {
-        // Carga la siguiente escena (asegúrate de agregarla en Build Settings)
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("EscenaVideoIntro"); 
     }
 
     public void SalirJuego()
     {
         Debug.Log("Saliendo del juego...");
-        Application.Quit(); // Funciona al compilar el juego
+        Application.Quit();
     }
 }
 

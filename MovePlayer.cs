@@ -9,6 +9,8 @@ public class MovePlayer : MonoBehaviour
     public float MaxSpeed = 25f;
 
 
+    Animator anim;
+
     //movimiento de camara 
     public float Sensibility = 2f;
     public float LimitX = 45;
@@ -23,25 +25,38 @@ public class MovePlayer : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        anim = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //move character
+        
+
+        anim.SetFloat("movimientos", 0, 0.1f, Time.deltaTime);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
             speed = MaxSpeed;
+            anim.SetFloat("movimientos", 1, 0.1f, Time.deltaTime);
         } else
         {
             speed = MinSpeed;
+
+            anim.SetFloat("movimientos", 0.5f, 0.1f, Time.deltaTime);
         }
         
 
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
 
+
+        if (x == 0 && y == 0)
+        {
+            anim.SetFloat("movimientos", 0, 0.1f, Time.deltaTime); // animación de estar quieto
+        }
+        
         transform.Translate(new Vector3(x, 0, y) * Time.deltaTime * speed);
 
         //camara
